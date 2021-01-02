@@ -1,2 +1,5 @@
 {:duct.server/pedestal
- {:service #:io.pedestal.http{:join? false}}}
+ {:service #:io.pedestal.http{:join? false}}
+
+ :route-guide.grpc/service
+ {:options {:env :dev}}}

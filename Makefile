@@ -17,3 +17,7 @@ joker-lint:
 .PHONY: lint
 lint:
 	@make cljstyle-check clj-kondo-lint joker-lint
+
+.PHONY: gen-clj
+gen-clj:
+	protoc --clojure_out=grpc-server:src --proto_path=resources resources/route_guide/*.proto

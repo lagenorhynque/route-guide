@@ -1,8 +1,23 @@
 {:duct.profile/base
- {:duct.core/project-ns route-guide}
+ {:duct.core/project-ns route-guide
+
+  :duct.server/pedestal
+  {:base-service #ig/ref :route-guide.grpc/service
+   :service #:io.pedestal.http{:routes #ig/ref :route-guide.grpc/routes
+                               :join? true
+                               :host #duct/env "SERVER_HOST"
+                               :port #duct/env ["SERVER_PORT" Int :or 8080]}}
+
+  :route-guide.grpc/routes {}
+
+  :route-guide.grpc/service
+  {:options {:env :prod}}}
 
  :duct.profile/dev   #duct/include "dev"
+ :duct.profile/test  #duct/include "test"
  :duct.profile/local #duct/include "local"
  :duct.profile/prod  {}
 
- :duct.module/logging {}}
+ :duct.module/cambium {}
+
+ :duct.module/pedestal {}}

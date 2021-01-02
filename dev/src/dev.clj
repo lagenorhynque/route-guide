@@ -2,6 +2,7 @@
   (:refer-clojure :exclude [test])
   (:require
    [clojure.java.io :as io]
+   [clojure.java.shell :as shell]
    [clojure.repl :refer :all]
    [clojure.tools.namespace.repl :refer [refresh]]
    [duct.core :as duct]
@@ -32,6 +33,14 @@
   ([sym]
    (eftest/run-tests (eftest/find-tests sym)
                      {:multithread? false})))
+
+;;; Protocol Buffers
+
+(defn gen-clj []
+  (let [{:keys [exit out err]} (shell/sh "make" "gen-clj")]
+    (print out)
+    (when-not (zero? exit)
+      (print err))))
 
 ;;; namespace settings
 
