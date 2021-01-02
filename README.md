@@ -1,8 +1,14 @@
 # route-guide
 
-FIXME: description
+Route Guide, an example gRPC API (ported from https://github.com/grpc/grpc/tree/v1.34.0/examples/python/route_guide).
 
 ## Developing
+
+### Prerequisites
+
+- [Java (JDK)](http://openjdk.java.net/)
+    - `java -version` >= 8 (1.8.0)
+- [Leiningen](https://leiningen.org/)
 
 ### Setup
 
@@ -15,12 +21,18 @@ lein duct setup
 This will create files for local configuration, and prep your system
 for the project.
 
-### Environment
+### Development environment
 
 To begin developing, start with a REPL.
 
 ```sh
 lein repl
+```
+
+With [rebel-readline](https://github.com/bhauman/rebel-readline):
+
+```sh
+$ lein rebel
 ```
 
 Then load the development environment.
@@ -34,11 +46,10 @@ Run `go` to prep and initiate the system.
 
 ```clojure
 dev=> (go)
-:duct.server.http.jetty/starting-server {:port 3000}
 :initiated
 ```
 
-By default this creates a web server at <http://localhost:3000>.
+By default this creates a web server at <http://localhost:8080>.
 
 When you make changes to your source files, use `reset` to reload any
 modified files and reset the server.
@@ -47,6 +58,13 @@ modified files and reset the server.
 dev=> (reset)
 :reloading (...)
 :resumed
+```
+
+### Production build & run
+
+```sh
+$ lein uberjar
+$ java -jar target/route-guide.jar
 ```
 
 ### Testing
@@ -65,6 +83,37 @@ But you can also run tests through Leiningen.
 lein test
 ```
 
-## Legal
+with [cloverage](https://github.com/cloverage/cloverage):
 
-Copyright © 2021 FIXME
+```sh
+$ lein test-coverage
+# Open the coverage report
+$ open target/coverage/index.html
+```
+
+### Linting
+
+- [`eastwood`](https://github.com/jonase/eastwood)
+
+```sh
+$ lein lint
+```
+
+- [`cljstyle check`](https://github.com/greglook/cljstyle), [`clj-kondo`](https://github.com/borkdude/clj-kondo), [`joker`](https://github.com/candid82/joker)
+
+```sh
+$ make lint
+```
+
+- fixing formatting
+
+```sh
+$ make cljstyle-fix
+```
+
+### API Documentation ([Codox](https://github.com/weavejester/codox))
+
+```sh
+$ lein codox
+$ open target/codox/index.html
+```
