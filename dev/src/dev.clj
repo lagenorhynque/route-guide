@@ -9,23 +9,38 @@
    [eftest.runner :as eftest]
    [fipp.edn :refer [pprint]]
    [integrant.core :as ig]
-   [integrant.repl :refer [clear go halt init prep reset]]
-   [integrant.repl.state :refer [config system]]))
+   [integrant.repl :refer [clear go halt init prep]]
+   [integrant.repl.state :refer [config system]]
+   [orchestra.spec.test :as stest]))
 
 (duct/load-hierarchy)
 
 (defn read-config []
   (duct/read-config (io/resource "route_guide/config.edn")))
 
-(defn test []
-  (eftest/run-tests (eftest/find-tests "test")))
+(defn reset []
+  (let [result (integrant.repl/reset)]
+    (with-out-str (stest/instrument))
+    result))
 
-(def profiles
-  [:duct.profile/dev :duct.profile/local])
+;;; unit testing
+
+(defn test
+  ([]
+   (eftest/run-tests (eftest/find-tests "test")
+                     {:multithread? false}))
+  ([sym]
+   (eftest/run-tests (eftest/find-tests sym)
+                     {:multithread? false})))
+
+;;; namespace settings
 
 (clojure.tools.namespace.repl/set-refresh-dirs "dev/src" "src" "test")
 
 (when (io/resource "local.clj")
   (load "local"))
+
+(def profiles
+  [:duct.profile/dev :duct.profile/local])
 
 (integrant.repl/set-prep! #(duct/prep-config (read-config) profiles))
