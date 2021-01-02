@@ -38,18 +38,15 @@
                   :plugins [[jonase/eastwood "0.3.12"]
                             [lein-ancient "0.6.15"]
                             [lein-cloverage "1.2.1"]
-                            [lein-codox "0.10.7"]
-                            [lein-kibit "0.1.8"]]
+                            [lein-codox "0.10.7"]]
                   :aliases {"rebel" ^{:doc "Run REPL with rebel-readline."}
                             ["trampoline" "run" "-m" "rebel-readline.main"]
                             "test-coverage" ^{:doc "Execute cloverage."}
                             ["cloverage" "--ns-exclude-regex" "^(:?dev|user)$" "--codecov" "--junit"]
-                            "lint" ^{:doc "Execute eastwood and kibit."}
-                            ["do"
-                             ["eastwood" "{:config-files [\"dev/resources/eastwood_config.clj\"]
+                            "lint" ^{:doc "Execute eastwood."}
+                            ["eastwood" "{:config-files [\"dev/resources/eastwood_config.clj\"]
                                            :source-paths [\"src\"]
-                                           :test-paths []}"]
-                             ["kibit"]]}
+                                           :test-paths []}"]}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]
                   :cljfmt {:indents {fdef [[:inner 0]]

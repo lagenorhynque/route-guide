@@ -46,6 +46,11 @@
 
 (clojure.tools.namespace.repl/set-refresh-dirs "dev/src" "src" "test")
 
+;; miscellaneous utilities
+
+(defn db []
+  (:route-guide.boundary.db.core/db system))
+
 (when (io/resource "local.clj")
   (load "local"))
 

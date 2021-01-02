@@ -8,10 +8,14 @@
                                :host #duct/env "SERVER_HOST"
                                :port #duct/env ["SERVER_PORT" Int :or 8080]}}
 
-  :route-guide.grpc/routes {}
+  :route-guide.grpc/routes
+  {:db #ig/ref :route-guide.boundary.db.core/db}
 
   :route-guide.grpc/service
-  {:options {:env :prod}}}
+  {:options {:env :prod}}
+
+  :route-guide.boundary.db.core/db
+  {:path "route_guide/route_guide_db.json"}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/test  #duct/include "test"

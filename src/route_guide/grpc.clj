@@ -5,12 +5,14 @@
    [io.pedestal.http.body-params :as body-params]
    [protojure.pedestal.core :as protojure.pedestal]
    [protojure.pedestal.routes :as proutes]
-   [route-guide.service.greeter :as greeter]))
+   [route-guide.interceptor :as interceptor]
+   [route-guide.service.route-guide :as route-guide]))
 
 (defmethod ig/init-key ::routes
-  [_ _]
-  (let [common-interceptors [(body-params/body-params)]]
-    (-> greeter/service
+  [_ {:keys [db]}]
+  (let [common-interceptors [(body-params/body-params)
+                             (interceptor/attach-db db)]]
+    (-> route-guide/service
         (assoc :interceptors common-interceptors)
         proutes/->tablesyntax
         set)))

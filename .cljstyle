@@ -1,4 +1,4 @@
-{:files {:ignore #{}}
+{:files {:ignore #{#"src/io/grpc/examples/routeguide.*.cljc?"}}
  :rules {:blank-lines {:max-consecutive 1
                        :padding-lines 1}
          :functions {:enabled? false}

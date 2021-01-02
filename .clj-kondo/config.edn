@@ -1,3 +1,4 @@
 {:lint-as {clojure.test.check.clojure-test/defspec clojure.test/deftest
            clojure.test.check.properties/for-all clojure.core/for}
- :linters {:unresolved-namespace {:exclude []}}}
+ :linters {:unresolved-namespace {:exclude []}}
+ :output {:exclude-files ["src/io/grpc/examples/routeguide.*.cljc?"]}}

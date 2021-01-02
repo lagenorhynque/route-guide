@@ -1,6 +1,7 @@
 {:ignored-file-regexes [#"dev/.+"
-                        #"profiles.clj"]
- :ignored-unused-namespaces []
+                        #"profiles.clj"
+                        #"src/io/grpc/examples/routeguide.*.cljc?"]
+ :ignored-unused-namespaces [route-guide.boundary.db.core]
  :known-macros [clojure.spec.alpha/fdef
                 clojure.test.check.clojure-test/defspec
                 clojure.test.check.properties/for-all]
