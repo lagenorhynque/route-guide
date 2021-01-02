@@ -1,1 +1,2 @@
-{}
+{:duct.server/pedestal
+ {:service #:io.pedestal.http{:join? false}}}

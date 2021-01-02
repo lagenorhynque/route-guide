@@ -1,0 +1,2 @@
+{:duct.server/pedestal
+ {:service #:io.pedestal.http{:port 8081}}}
