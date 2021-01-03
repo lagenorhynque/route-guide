@@ -66,4 +66,17 @@
              elapsed-time (Duration/between start-time (Instant/now))]
          (response (-> summary
                        (update :distance long)
-                       (assoc :elapsed-time (.getSeconds elapsed-time)))))))})
+                       (assoc :elapsed-time (.getSeconds elapsed-time))))))
+     (RouteChat [_ {route-note-ch :grpc-params
+                    out-ch :grpc-out}]
+       (async/go-loop [new-note (async/<! route-note-ch)
+                       prev-notes []]
+         (if new-note
+           (do (doseq [prev-note prev-notes
+                       :when (= (:location prev-note)
+                                (:location new-note))]
+                 (async/>! out-ch prev-note))
+               (recur (async/<! route-note-ch)
+                      (conj prev-notes new-note)))
+           (async/close! out-ch)))
+       (response out-ch)))})
