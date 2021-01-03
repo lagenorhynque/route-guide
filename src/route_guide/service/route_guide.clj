@@ -14,4 +14,9 @@
        (if-let [feature (db.feature/find-feature-by-point db point)]
          (response feature)
          (response {:name ""
-                    :location point}))))})
+                    :location point})))
+     (ListFeatures [_ {:keys [db]
+                       rectangle :grpc-params
+                       out-ch :grpc-out}]
+       (db.feature/find-features-within-rectangle db out-ch rectangle)
+       (response out-ch)))})
