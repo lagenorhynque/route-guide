@@ -45,13 +45,10 @@
                             ["cloverage" "--ns-exclude-regex" "^(:?dev|user)$" "--codecov" "--junit"]
                             "lint" ^{:doc "Execute eastwood."}
                             ["eastwood" "{:config-files [\"dev/resources/eastwood_config.clj\"]
-                                           :source-paths [\"src\"]
-                                           :test-paths []}"]}
+                                          :source-paths [\"src\"]
+                                          :test-paths []}"]}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]
-                  :cljfmt {:indents {fdef [[:inner 0]]
-                                     for-all [[:inner 0]]
-                                     when-valid [[:inner 0]]}}
                   :codox {:output-path "target/codox"
                           :source-uri "https://github.com/lagenorhynque/route-guide/blob/master/{filepath}#L{line}"
                           :metadata {:doc/format :markdown}}}
