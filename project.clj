@@ -2,17 +2,21 @@
   :description "Route Guide, an example gRPC API"
   :url "https://github.com/lagenorhynque/route-guide"
   :min-lein-version "2.8.1"
-  :dependencies [[com.google.protobuf/protobuf-java "3.14.0"]
-                 [duct.module.cambium "1.2.0"]
-                 [duct.module.pedestal "2.1.2" :exclusions [io.pedestal/pedestal.jetty]]
+  :dependencies [[com.google.protobuf/protobuf-java "3.25.1"]
+                 [duct.module.cambium "1.3.1" :exclusions [cheshire]]
+                 [duct.module.pedestal "2.2.0" :exclusions [org.eclipse.jetty/jetty-http
+                                                            org.eclipse.jetty/jetty-io
+                                                            org.eclipse.jetty/jetty-util]]
                  [duct/core "0.8.0"]
                  [integrant "0.8.0"]
-                 [io.undertow/undertow-core "2.2.3.Final"]
-                 [io.undertow/undertow-servlet "2.2.3.Final"]
-                 [org.clojure/clojure "1.10.1"]
-                 [protojure "1.5.12"]
-                 [protojure/google.protobuf "0.9.1"]]
-  :plugins [[duct/lein-duct "0.12.1"]]
+                 [io.undertow/undertow-core "2.3.10.Final"]
+                 [io.undertow/undertow-servlet "2.3.10.Final"]
+                 [org.clojure/clojure "1.11.1"]
+                 [org.slf4j/slf4j-api "2.0.11"]
+                 [protojure "1.7.3" :exclusions [io.pedestal/pedestal.log
+                                                 org.clojure/core.async]]
+                 [protojure/google.protobuf "1.0.0"]]
+  :plugins [[duct/lein-duct "0.12.3"]]
   :main ^:skip-aot route-guide.main
   :resource-paths ["resources" "target/resources"]
   :prep-tasks     ["javac" "compile" ["run" ":duct/compiler"]]
@@ -27,18 +31,19 @@
    :shared {}
    :project/dev  {:source-paths   ["dev/src"]
                   :resource-paths ["dev/resources"]
-                  :dependencies   [[clj-http "3.11.0"]
+                  :dependencies   [[clj-http "3.12.3"]
                                    [com.bhauman/rebel-readline "0.1.4"]
-                                   [eftest "0.5.9" :exclusions [org.clojure/tools.namespace]]
-                                   [fipp "0.6.23"]
+                                   [eftest "0.6.0" :exclusions [org.clojure/tools.logging
+                                                                org.clojure/tools.namespace]]
+                                   [fipp "0.6.26"]
                                    [hawk "0.2.11"]
-                                   [integrant/repl "0.3.2"]
+                                   [integrant/repl "0.3.3" :exclusions [integrant]]
                                    [orchestra "2021.01.01-1"]
-                                   [pjstadig/humane-test-output "0.10.0"]]
-                  :plugins [[jonase/eastwood "0.3.12"]
-                            [lein-ancient "0.6.15"]
-                            [lein-cloverage "1.2.1"]
-                            [lein-codox "0.10.7"]]
+                                   [pjstadig/humane-test-output "0.11.0"]]
+                  :plugins [[jonase/eastwood "1.4.2"]
+                            [lein-ancient "0.7.0"]
+                            [lein-cloverage "1.2.4"]
+                            [lein-codox "0.10.8"]]
                   :aliases {"rebel" ^{:doc "Run REPL with rebel-readline."}
                             ["trampoline" "run" "-m" "rebel-readline.main"]
                             "test-coverage" ^{:doc "Execute cloverage."}

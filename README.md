@@ -7,7 +7,7 @@ Route Guide, an example gRPC API based on [Protojure](https://github.com/protoju
 ### Prerequisites
 
 - [Java (JDK)](http://openjdk.java.net/)
-    - `java -version` >= 8 (1.8.0)
+    - `java --version` >= 11
 - [Leiningen](https://leiningen.org/)
 
 ### Setup
