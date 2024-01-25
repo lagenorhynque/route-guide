@@ -16,6 +16,8 @@
   (RecordRoute [this param])
   (RouteChat [this param]))
 
+(def RouteGuide-service-name "routeguide.RouteGuide")
+
 (defn- GetFeature-dispatch
   [ctx request]
   (GetFeature ctx request))
@@ -30,7 +32,7 @@
   (RouteChat ctx request))
 
 (def ^:const rpc-metadata
-  [{:pkg "io.grpc.examples.routeguide" :service "RouteGuide" :method "GetFeature" :method-fn GetFeature-dispatch :server-streaming false :client-streaming false :input pb->Point :output new-Feature}
-   {:pkg "io.grpc.examples.routeguide" :service "RouteGuide" :method "ListFeatures" :method-fn ListFeatures-dispatch :server-streaming true :client-streaming false :input pb->Rectangle :output new-Feature}
-   {:pkg "io.grpc.examples.routeguide" :service "RouteGuide" :method "RecordRoute" :method-fn RecordRoute-dispatch :server-streaming false :client-streaming true :input pb->Point :output new-RouteSummary}
-   {:pkg "io.grpc.examples.routeguide" :service "RouteGuide" :method "RouteChat" :method-fn RouteChat-dispatch :server-streaming true :client-streaming true :input pb->RouteNote :output new-RouteNote}])
+  [{:pkg "routeguide" :service "RouteGuide" :method "GetFeature" :method-fn GetFeature-dispatch :server-streaming false :client-streaming false :input pb->Point :output new-Feature}
+   {:pkg "routeguide" :service "RouteGuide" :method "ListFeatures" :method-fn ListFeatures-dispatch :server-streaming true :client-streaming false :input pb->Rectangle :output new-Feature}
+   {:pkg "routeguide" :service "RouteGuide" :method "RecordRoute" :method-fn RecordRoute-dispatch :server-streaming false :client-streaming true :input pb->Point :output new-RouteSummary}
+   {:pkg "routeguide" :service "RouteGuide" :method "RouteChat" :method-fn RouteChat-dispatch :server-streaming true :client-streaming true :input pb->RouteNote :output new-RouteNote}])

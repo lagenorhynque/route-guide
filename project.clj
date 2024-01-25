@@ -2,20 +2,15 @@
   :description "Route Guide, an example gRPC API"
   :url "https://github.com/lagenorhynque/route-guide"
   :min-lein-version "2.8.1"
-  :dependencies [[com.google.protobuf/protobuf-java "3.25.1"]
-                 [duct.module.cambium "1.3.1" :exclusions [cheshire]]
-                 [duct.module.pedestal "2.2.0" :exclusions [org.eclipse.jetty/jetty-http
-                                                            org.eclipse.jetty/jetty-io
-                                                            org.eclipse.jetty/jetty-util]]
-                 [duct/core "0.8.0"]
+  :dependencies [[duct.module.cambium "1.3.1" :exclusions [cheshire
+                                                           org.clojure/tools.logging]]
+                 [duct.module.pedestal "2.2.0"]
+                 [duct/core "0.8.1"]
                  [integrant "0.8.0"]
-                 [io.undertow/undertow-core "2.3.10.Final"]
-                 [io.undertow/undertow-servlet "2.3.10.Final"]
+                 [io.github.protojure/google.protobuf "2.0.1" :exclusions [io.github.protojure/core]]
+                 [io.github.protojure/grpc-server "2.8.1" :exclusions [io.pedestal/pedestal.log]]
                  [org.clojure/clojure "1.11.1"]
-                 [org.slf4j/slf4j-api "2.0.11"]
-                 [protojure "1.7.3" :exclusions [io.pedestal/pedestal.log
-                                                 org.clojure/core.async]]
-                 [protojure/google.protobuf "1.0.0"]]
+                 [org.slf4j/slf4j-api "2.0.11"]]
   :plugins [[duct/lein-duct "0.12.3"]]
   :main ^:skip-aot route-guide.main
   :resource-paths ["resources" "target/resources"]
@@ -31,7 +26,7 @@
    :shared {}
    :project/dev  {:source-paths   ["dev/src"]
                   :resource-paths ["dev/resources"]
-                  :dependencies   [[clj-http "3.12.3"]
+                  :dependencies   [[clj-http "3.12.3" :exclusions [commons-io]]
                                    [com.bhauman/rebel-readline "0.1.4"]
                                    [eftest "0.6.0" :exclusions [org.clojure/tools.logging
                                                                 org.clojure/tools.namespace]]
