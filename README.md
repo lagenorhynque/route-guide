@@ -1,5 +1,7 @@
 # route-guide
 
+[![CircleCI](https://circleci.com/gh/lagenorhynque/route-guide.svg?style=shield)](https://circleci.com/gh/lagenorhynque/route-guide)
+
 Route Guide, an example gRPC API based on [Protojure](https://github.com/protojure/lib), [Pedestal](https://github.com/pedestal/pedestal) & [Duct](https://github.com/duct-framework/duct) (ported from https://github.com/grpc/grpc/tree/v1.34.0/examples/python/route_guide).
 
 ## Developing
